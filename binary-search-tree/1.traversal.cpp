@@ -64,10 +64,34 @@ vector<int> traversal_of_binary_search_tree(Node* root){
 
 
 // BST iterator
+// this is important concept
+// time complexity o(1)
+// space complexity o(H)
 class BST{
+    public:
+    // First In Last out
+    stack<Node*> st;
+    BST(Node* root){
+        pushAll(root);
+    }
 
+    bool hasNext(){
+        return !st.empty();
+    }
+
+    int next(){
+        Node* top = st.top();
+        st.pop();
+        pushAll(top->right);
+        return top->val;
+    }   
+
+    void pushAll(Node* root){
+        if(root == NULL) return;
+        Node* temp = root;
+        while(temp){
+            st.push(temp);
+            temp = temp->left;
+        }
+    }
 };
-
-vector<int> bst_traversal(Node* root){
-    if(root == NULL) return {};
-}
